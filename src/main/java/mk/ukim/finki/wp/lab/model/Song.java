@@ -15,6 +15,7 @@ public class Song {
     private int releaseYear;
     List<Artist> performers;
     private Album album;
+    private Integer counter;
 
     public Song(String trackId, String title, String genre, int releaseYear, List<Artist> performers, Album album) {
         this.id = (long) (Math.random() *1000);
@@ -24,6 +25,7 @@ public class Song {
         this.releaseYear = releaseYear;
         this.performers = performers;
         this.album = album;
+        counter=0;
     }
 
 

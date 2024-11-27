@@ -14,4 +14,5 @@ public interface SongService {
     public List<Song> searchByTitle(String title);
     public Optional<Song> findById(Long id);
     void deleteById(Long id);
+    public Integer songViews(Long id);
 }

@@ -54,6 +54,11 @@ public class SongServiceImpl implements SongService {
         this.songRepository.deleteById(id);
     }
 
+    @Override
+    public Integer songViews(Long id) {
+        return songRepository.songCounts(id);
+    }
+
     public Optional<Song> save(String trackId, String title, String genre, Integer releaseYear, Long albumId) {
 
         Album album = this.albumRepository.findById(albumId)

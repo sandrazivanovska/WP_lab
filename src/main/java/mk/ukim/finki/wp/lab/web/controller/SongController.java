@@ -30,6 +30,7 @@ public class SongController {
         if(error!= null && !error.isEmpty()){
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
+
         }
 
         List<Song> songs = this.songService.listSongs();
@@ -89,9 +90,10 @@ public class SongController {
     }
 
     @PostMapping("/selected")
-    public String getArtistPage(HttpServletRequest req){
+    public String getArtistPage(HttpServletRequest req, Model model){
         String trackId = req.getParameter("trackId");
         req.getSession().setAttribute("trackId", trackId);
+        Integer counter = 0;
         return "redirect:/artist";
     }
 

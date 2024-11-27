@@ -1,5 +1,6 @@
 package mk.ukim.finki.wp.lab.web.controller;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,10 +22,12 @@ import java.util.List;
 public class ArtistController {
     private final ArtistService artistService;
     private final SpringTemplateEngine springTemplateEngine;
+    private final ServletContext servletContext;
 
-    public ArtistController(ArtistService artistService, SpringTemplateEngine springTemplateEngine) {
+    public ArtistController(ArtistService artistService, SpringTemplateEngine springTemplateEngine, ServletContext servletContext) {
         this.artistService = artistService;
         this.springTemplateEngine = springTemplateEngine;
+        this.servletContext = servletContext;
     }
 
     @GetMapping
@@ -41,13 +44,12 @@ public class ArtistController {
     }
 
     @PostMapping
-    protected String addArtist(HttpServletRequest request){
+    protected String addArtist(HttpServletRequest request, Model model){
         long id = Long.parseLong(request.getParameter("artistId"));
         Artist artist = artistService.findById(id);
         request.getSession().setAttribute("selectedArtist",artist);
         String trackId = (String) request.getSession().getAttribute("trackId");
         System.out.println("Track ID in session: " + trackId);
         return "redirect:/songDetails";
-
     }
 }
